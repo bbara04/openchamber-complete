@@ -10,3 +10,4 @@ services:
       - UI_PASSWORD=Titok123
       - OPENCHAMBER_HOST=0.0.0.0
     restart: unless-stopped
+    network_mode: host
