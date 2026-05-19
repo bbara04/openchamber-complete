@@ -2,11 +2,11 @@ services:
   opencode-chamber:
     build: .
     ports:
-      - "${PORT:-3000}:3000"
+      - "3000:3000"
     volumes:
+      - "./opencode-config:/root/.config/opencode"
       - "./repositories:/root/repositories"
     environment:
-      - UI_PASSWORD=${UI_PASSWORD:-}
+      - UI_PASSWORD=Titok123
       - OPENCHAMBER_HOST=0.0.0.0
-    working_dir: /root/repositories
     restart: unless-stopped
