@@ -4,10 +4,9 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - "./opencode-config:/root/.config/opencode"
-      - "./repositories:/root/repositories"
+      - "./opencode-config:/home/agent/.config/opencode"
+      - "./codes:/home/agent/repositories"
     environment:
-      - UI_PASSWORD=Titok123
+      - UI_PASSWORD=
       - OPENCHAMBER_HOST=0.0.0.0
     restart: unless-stopped
-    network_mode: host
