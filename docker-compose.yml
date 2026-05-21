@@ -5,8 +5,6 @@ services:
       args:
         UID: ${UID:-1000}
         GID: ${GID:-1000}
-    ports:
-      - "3000:3000"
     volumes:
       - "./opencode-config:/home/.config/opencode"
       - "./openchamber-config:/home/.config/openchamber"
