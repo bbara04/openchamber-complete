@@ -1,4 +1,5 @@
 .DS_Store
+.env
 repositories/
 opencode-config/
 openchamber-config/

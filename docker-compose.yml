@@ -10,10 +10,9 @@ services:
     volumes:
       - "./opencode-config:/home/.config/opencode"
       - "./openchamber-config:/home/.config/openchamber"
-      - "../codes:/home/repositories"
+      - "${REPOSITORIES_PATH}:/home/repositories"
       - "/var/run/docker.sock:/var/run/docker.sock"
-    environment:
-      - UI_PASSWORD=
-      - OPENCHAMBER_HOST=0.0.0.0
+    env_file:
+      - .env
     restart: unless-stopped
     network_mode: host
