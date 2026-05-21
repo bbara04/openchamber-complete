@@ -1,6 +1,6 @@
 FROM node:20-alpine
 
-RUN apk add --no-cache curl bash ca-certificates git openssh tar
+RUN apk add --no-cache curl bash ca-certificates git openssh tar docker-cli docker-cli-compose
 
 ENV HOME=/home
 

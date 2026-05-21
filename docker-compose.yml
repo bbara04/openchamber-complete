@@ -9,7 +9,9 @@ services:
       - "3000:3000"
     volumes:
       - "./opencode-config:/home/.config/opencode"
-      - "./codes:/home/repositories"
+      - "./openchamber-config:/home/.config/openchamber"
+      - "../codes:/home/repositories"
+      - "/var/run/docker.sock:/var/run/docker.sock"
     environment:
       - UI_PASSWORD=
       - OPENCHAMBER_HOST=0.0.0.0
