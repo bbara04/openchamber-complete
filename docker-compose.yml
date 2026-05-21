@@ -7,6 +7,9 @@ services:
         GID: ${GID:-1000}
     volumes:
       - "./opencode-config:/home/.config/opencode"
+      - "./opencode-data:/home/.local/share/opencode"
+      - "./opencode-state:/home/.local/state/opencode"
+      - "./opencode-cache:/home/.cache/opencode"
       - "./openchamber-config:/home/.config/openchamber"
       - "${REPOSITORIES_PATH}:/home/repositories"
       - "/var/run/docker.sock:/var/run/docker.sock"

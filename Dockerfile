@@ -15,6 +15,6 @@ ENV OPENCHAMBER_HOST="0.0.0.0"
 
 WORKDIR /home
 
-EXPOSE 3000
+EXPOSE 5200
 
-CMD ["sh", "-c", "openchamber serve --host 0.0.0.0 --port 3000 --foreground ${UI_PASSWORD:+--ui-password $UI_PASSWORD}"]
+CMD ["sh", "-c", "rm -f /home/.config/openchamber/run/openchamber-*.pid /home/.config/openchamber/run/openchamber-*.json && exec openchamber serve --host 0.0.0.0 --port 5200 --foreground ${UI_PASSWORD:+--ui-password $UI_PASSWORD}"]
