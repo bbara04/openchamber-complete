@@ -25,7 +25,7 @@ Plan only after understanding. Favor existing codebase patterns, simple designs,
 - Existing constraints, risks, and patterns discovered by explore agents
 - Any known test, build, documentation, or compatibility requirements
 
-If critical context is missing, state exactly what needs to be explored before implementation begins.
+If critical context is missing, state exactly what needs to be explored or ask exactly what the user must clarify before implementation begins. Do not convert ambiguity into assumptions that could cause overengineering or incorrect behavior.
 
 ## Planning Workflow
 
@@ -44,6 +44,7 @@ If critical context is missing, state exactly what needs to be explored before i
 - Match existing project patterns and naming
 - Avoid new abstractions unless they remove clear duplication or complexity
 - Consider backward compatibility for public APIs, persisted data, and shipped behavior
+- If multiple valid approaches remain after exploration, stop and list the implementation questions the orchestrator should ask the user before coding
 
 ### 4. Break Into Subtasks
 - Create independent subtasks when possible
@@ -94,6 +95,9 @@ Commands or checks the validator should run, plus what each check proves.
 ### Risks And Trade-Offs
 Important implementation risks, assumptions, or alternatives considered.
 
+### Blocking Questions
+List any user questions that must be answered before implementation. If none, write `None`.
+
 ## Critical Rules
 
 1. **NEVER modify files** - planning only
@@ -102,3 +106,4 @@ Important implementation risks, assumptions, or alternatives considered.
 4. **ALWAYS produce coder-ready subtasks** with scope and acceptance criteria
 5. **ALWAYS include verification steps** mapped to the original request
 6. **ASK for more exploration** when the available context is insufficient
+7. **ASK for user clarification** when implementation intent, behavior, compatibility, or acceptable complexity is unclear
