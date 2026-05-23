@@ -35,6 +35,19 @@ docker compose build --no-cache
 docker compose up -d
 ```
 
+## Browser and PWA notifications
+
+OpenChamber notifications are enabled in `openchamber-config/settings.json` for:
+
+- Prompt completion: `notifyOnCompletion`
+- Questions/input needed: `notifyOnQuestion`
+- Errors: `notifyOnError`
+- Subtasks: `notifyOnSubtasks`
+
+To receive notifications, open OpenChamber in your browser or installed PWA and allow notifications for the site/app when prompted. If notifications were previously blocked, reset the site notification permission in your browser settings.
+
+For mobile/PWA notifications, install OpenChamber as a PWA and prefer an HTTPS URL, such as a tunnel or reverse proxy, because background notifications are limited on plain HTTP.
+
 ## Managing repositories
 
 Edit `docker-compose.yml` to mount the repositories you want OpenCode to access.
