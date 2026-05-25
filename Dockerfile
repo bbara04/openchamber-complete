@@ -1,6 +1,6 @@
 FROM node:20-alpine
 
-RUN apk add --no-cache curl bash ca-certificates git openssh tar docker-cli docker-cli-compose
+RUN apk add --no-cache curl bash ca-certificates git openssh tar docker-cli docker-cli-compose python3 make g++
 
 ENV HOME=/home
 
@@ -9,6 +9,7 @@ RUN curl -fsSL https://opencode.ai/install | bash
 
 # Install OpenChamber (web + PWA)
 RUN curl -fsSL https://raw.githubusercontent.com/openchamber/openchamber/main/scripts/install.sh | bash
+RUN npm rebuild node-pty --build-from-source --prefix /usr/local/share/.config/yarn/global
 
 ENV OPENCODE_BINARY="/home/.opencode/bin/opencode"
 ENV OPENCHAMBER_HOST="0.0.0.0"
