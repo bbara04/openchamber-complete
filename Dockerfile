@@ -1,6 +1,19 @@
-FROM node:20-alpine
+FROM node:20-bookworm-slim
 
-RUN apk add --no-cache curl bash ca-certificates git openssh tar docker-cli docker-cli-compose python3 make g++
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        curl \
+        bash \
+        ca-certificates \
+        git \
+        openssh-client \
+        tar \
+        docker.io \
+        docker-compose \
+        python3 \
+        make \
+        g++ \
+    && rm -rf /var/lib/apt/lists/*
 
 ENV HOME=/home
 
