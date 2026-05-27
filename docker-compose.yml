@@ -1,5 +1,5 @@
 services:
-  opencode-chamber:
+  opencode-web:
     build:
       context: .
       args:
@@ -10,10 +10,11 @@ services:
       - "./opencode-data:/home/.local/share/opencode"
       - "./opencode-state:/home/.local/state/opencode"
       - "./opencode-cache:/home/.cache/opencode"
-      - "./openchamber-config:/home/.config/openchamber"
       - "${REPOSITORIES_PATH}:/home/repositories"
       - "/var/run/docker.sock:/var/run/docker.sock"
     env_file:
       - .env
+    environment:
+      OPENCODE_PORT: ${OPENCODE_PORT:-3000}
     restart: unless-stopped
     network_mode: host
