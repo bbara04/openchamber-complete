@@ -1,20 +1,18 @@
 services:
-  opencode-web:
+  openchamber:
     build:
       context: .
-      args:
-        UID: ${UID:-1000}
-        GID: ${GID:-1000}
     volumes:
       - "./opencode-config:/home/.config/opencode"
       - "./opencode-data:/home/.local/share/opencode"
       - "./opencode-state:/home/.local/state/opencode"
       - "./opencode-cache:/home/.cache/opencode"
-      - "${REPOSITORIES_PATH}:/home/repositories"
+      - "./openchamber-config:/home/.config/openchamber"
+      - "${REPOSITORIES_PATH:-./repositories}:/home/repositories"
       - "/var/run/docker.sock:/var/run/docker.sock"
-    env_file:
-      - .env
     environment:
-      OPENCODE_PORT: ${OPENCODE_PORT:-3000}
+      OPENCHAMBER_PORT: ${OPENCHAMBER_PORT:-5200}
+      OPENCODE_BINARY: /home/.opencode/bin/opencode
+      UI_PASSWORD: ${UI_PASSWORD:-}
     restart: unless-stopped
     network_mode: host

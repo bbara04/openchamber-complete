@@ -1,18 +1,15 @@
 # OpenCode Web
 
-Dockerized environment running [OpenCode](https://opencode.ai) with its built-in web interface for interacting with OpenCode agents directly from a browser.
+Dockerized [OpenCode](https://opencode.ai) with [OpenChamber](https://github.com/openchamber/openchamber) as the browser/PWA frontend.
 
 ## What it does
 
-This project provides a self-hosted web UI for OpenCode. It lets you:
-
-- Access OpenCode agents through a browser or mobile device
-- Work on multiple git repositories mounted into the container
-- Configure OpenCode with custom agents, commands, and rules
-- Run OpenCode sessions on a remote server or local machine without installing anything besides Docker
+This project runs OpenChamber in the container and lets OpenChamber start and keep OpenCode available in the background.
 
 The stack inside the container:
-- **OpenCode CLI and web UI** — the AI coding assistant and browser interface
+
+- **OpenCode CLI** — the AI coding assistant
+- **OpenChamber** — web frontend that starts and presents OpenCode
 - **Node 20** — runtime
 
 ## How to run
@@ -21,23 +18,21 @@ The stack inside the container:
 docker compose up -d
 ```
 
-Then open `http://localhost:3000` in your browser.
+Open `http://localhost:5200` in your browser.
 
-To run on a different port, set `OPENCODE_PORT` in `.env` and restart the container:
+To run OpenChamber on a different port, set `OPENCHAMBER_PORT` in `.env` and restart the container:
 
 ```env
-OPENCODE_PORT=4096
+OPENCHAMBER_PORT=5300
 ```
 
-Then open `http://localhost:4096`.
+The container uses host networking, so OpenChamber binds directly to `OPENCHAMBER_PORT`; there is no separate Docker port mapping to update.
 
-The container uses host networking, so the OpenCode process binds directly to `OPENCODE_PORT`; there is no separate Docker port mapping to update.
-
-To protect the UI, set `OPENCODE_SERVER_PASSWORD` in `.env`. The default username is `opencode`.
+To protect the UI, set `UI_PASSWORD` in `.env`.
 
 ## How to update
 
-Rebuild the image to pull the latest version of OpenCode:
+Rebuild the image to pull the latest versions of OpenCode and OpenChamber:
 
 ```bash
 docker compose build --no-cache
@@ -46,15 +41,16 @@ docker compose up -d
 
 ## Managing repositories
 
-Edit `docker-compose.yml` to mount the repositories you want OpenCode to access.
+Set `REPOSITORIES_PATH` in `.env` to the host directory that contains repositories OpenCode should work on:
 
-The `repositories` volume maps `./repositories` on your host to `/home/repositories` inside the container:
-
-```yaml
-volumes:
-  - "./repositories:/home/repositories"
+```env
+REPOSITORIES_PATH=./repositories
 ```
 
-Clone or copy your git repos into `./repositories/` on your host machine. Each subdirectory becomes a project OpenCode can work on inside the container.
+The directory is mounted at `/home/repositories` inside the container.
 
-**Important:** `repositories/` is in `.gitignore` — it won't be committed to this repo.
+## Browser and PWA notifications
+
+OpenChamber can send browser notifications for prompt completion, questions, errors, and subtasks.
+
+To receive notifications, open OpenChamber in your browser or installed PWA and allow notifications for the site/app when prompted. If notifications were previously blocked, reset the site notification permission in your browser settings.

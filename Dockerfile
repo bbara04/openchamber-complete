@@ -23,9 +23,15 @@ ENV HOME=/home
 # Install OpenCode CLI
 RUN curl -fsSL https://opencode.ai/install | bash
 
-ENV PATH="/home/.opencode/bin:${PATH}"
-ENV OPENCODE_PORT="3000"
+# Install OpenChamber (web + PWA)
+RUN curl -fsSL https://raw.githubusercontent.com/openchamber/openchamber/main/scripts/install.sh | bash
+RUN npm rebuild node-pty --build-from-source --prefix /usr/local/share/.config/yarn/global
+
+ENV OPENCHAMBER_PORT="5200"
+ENV OPENCODE_BINARY="/home/.opencode/bin/opencode"
 
 WORKDIR /home
 
-CMD ["sh", "-c", "exec opencode web --hostname 0.0.0.0 --port ${OPENCODE_PORT:-3000}"]
+EXPOSE 5200
+
+CMD ["sh", "-c", "rm -f /home/.config/openchamber/run/openchamber-*.pid /home/.config/openchamber/run/openchamber-*.json && exec openchamber serve --host 0.0.0.0 --port ${OPENCHAMBER_PORT:-5200} --foreground ${UI_PASSWORD:+--ui-password $UI_PASSWORD}"]
