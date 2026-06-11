@@ -1,4 +1,4 @@
-FROM node:20-bookworm-slim
+FROM node:26-trixie-slim
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -9,6 +9,7 @@ RUN apt-get update \
         findutils \
         git \
         grep \
+	openjdk-21-jre-headless \
         openssh-client \
         tar \
         docker.io \
@@ -25,7 +26,6 @@ RUN curl -fsSL https://opencode.ai/install | bash
 
 # Install OpenChamber (web + PWA)
 RUN curl -fsSL https://raw.githubusercontent.com/openchamber/openchamber/main/scripts/install.sh | bash
-RUN npm rebuild node-pty --build-from-source --prefix /usr/local/share/.config/yarn/global
 
 ENV OPENCODE_BINARY="/home/.opencode/bin/opencode"
 
