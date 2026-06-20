@@ -5,10 +5,10 @@ services:
       context: .
     volumes:
       - "./opencode-config:/home/.config/opencode"
-      - "./opencode-data:/home/.local/share/opencode"
-      - "./opencode-state:/home/.local/state/opencode"
-      - "./opencode-cache:/home/.cache/opencode"
-      - "./openchamber-config:/home/.config/openchamber"
+      - "./.config/opencode-data:/home/.local/share/opencode"
+      - "./.config/opencode-state:/home/.local/state/opencode"
+      - "./.config/opencode-cache:/home/.cache/opencode"
+      - "./.config/openchamber-config:/home/.config/openchamber"
       - "${REPOSITORIES_PATH:-./repositories}:/home/repositories"
       - "/var/run/docker.sock:/var/run/docker.sock"
     environment:
