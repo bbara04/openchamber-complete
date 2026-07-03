@@ -1,9 +1,7 @@
 ---
 description: Create git commit with auto-generated conventional commit message
 agent: build
-model: opencode/deepseek-v4-flash-free
 ---
-
 # Git Commit Command
 
 Create a well-structured git commit by analyzing staged changes and generating a conventional commit message.

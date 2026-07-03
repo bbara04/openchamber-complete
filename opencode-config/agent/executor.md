@@ -1,6 +1,5 @@
 ---
-description: Runs shell commands and returns command results. Use this instead
-  of the general agent whenever a task is only to execute commands.
+description: Runs shell commands and returns command results. Use this instead of the general agent whenever a task is only to execute commands.
 mode: subagent
 temperature: 0.1
 tools:
@@ -8,32 +7,21 @@ tools:
   edit: false
   bash: true
 permission:
-  doom_loop: ask
-  external_directory:
-    "*": ask
-    /home/.local/share/opencode/tool-output/*: allow
-    /tmp/opencode/*: allow
-  question: deny
-  plan_enter: deny
-  plan_exit: deny
-  read:
-    "*": deny
-    "*.env": ask
-    "*.env.*": ask
-    "*.env.example": allow
   edit: deny
-  bash:
-    rm *: deny
-    git push*: deny
-    git reset --hard*: deny
+  read: deny
   glob: deny
   grep: deny
   list: deny
   task: deny
   todowrite: deny
+  question: deny
   webfetch: deny
   websearch: deny
-model: opencode/deepseek-v4-flash-free
+  bash:
+    "*": allow
+    "rm *": deny
+    "git push*": deny
+    "git reset --hard*": deny
 ---
 
 You are the executor agent.
